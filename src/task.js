@@ -10,7 +10,7 @@ const fetchTasks = async () => {
 
 const addTask = async (state, title) => {
   await axios.post('http://localhost:3000/tasks', {
-    task: { title },
+    title,
   });
   return await fetchTasks();
   // const { tasks } = state;
@@ -20,7 +20,21 @@ const addTask = async (state, title) => {
   // };
 };
 
+const updateTask = async (id, status) => {
+  await axios.patch(`http://localhost:3000/tasks/${id}`, { status });
+
+  return await fetchTasks();
+};
+
+const removeTask = async (id) => {
+  await axios.delete(`http://localhost:3000/tasks/${id}`);
+
+  return await fetchTasks();
+};
+
 module.exports = {
   fetchTasks,
   addTask,
+  updateTask,
+  removeTask,
 };

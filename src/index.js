@@ -1,5 +1,5 @@
 import { render } from './view';
-import { fetchTasks, addTask } from './task';
+import { fetchTasks, addTask, updateTask } from './task';
 
 const update = (state) => {
   render(state, {
@@ -7,6 +7,10 @@ const update = (state) => {
       const newState = await addTask(state, title);
       update(newState);
     },
+    async onUpdateTask(id, status) {
+      const newState = await updateTask(id, status);
+      update(newState);
+    }
   });
 };
 
